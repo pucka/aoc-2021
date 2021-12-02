@@ -1,33 +1,28 @@
 with open("inputs/day2.txt") as file:
-    data = [x for x in [line.split() for line in file]]
+    # data = [["forward", 2],["down", 4]...]
+    data = [[x[0], int(x[1])] for x in [line.split() for line in file]]
 
 # Part 1
-position_matrix = [0, 0]  # [horisontal, depth]
-for [cmd, val] in data:
-    nr = int(val)
+pos_part1 = {'horisontal': 0, 'depth': 0}
+for cmd, nr in data:
     if cmd == 'down':
-        position_matrix[1] += nr
+        pos_part1['depth'] += nr
     elif cmd == 'up':
-        position_matrix[1] -= nr
+        pos_part1['depth'] -= nr
     else:
-        position_matrix[0] += nr
-
-part1 = position_matrix[0] * position_matrix[1]
+        pos_part1['horisontal'] += nr
 
 # Part 2
-position_matrix = [0, 0]  # [horisontal, depth]
+pos_part2 = {'horisontal': 0, 'depth': 0}
 aim = 0
-for [cmd, val] in data:
-    nr = int(val)
+for cmd, nr in data:
     if cmd == 'down':
         aim += nr
     elif cmd == 'up':
         aim -= nr
     else:
-        position_matrix[0] += nr
-        position_matrix[1] += aim * nr
+        pos_part2['horisontal'] += nr
+        pos_part2['depth'] += aim * nr
 
-part2 = position_matrix[0] * position_matrix[1]
-
-print("Part 1:", part1)
-print("Part 2:", part2)
+print("Part 1:", pos_part1['horisontal'] * pos_part1['depth'])
+print("Part 2:", pos_part2['horisontal'] * pos_part2['depth'])
