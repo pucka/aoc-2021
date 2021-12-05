@@ -6,22 +6,12 @@ with open("inputs/day5.txt") as file:
 nr_dic = {}
 part1 = 0
 for line in data:
-    y = -1
-    x = -1
-    if line[0] == line[2]:
-        sorted_nrs = sorted([line[1], line[3]])
-        x = line[0]
-    elif line[1] == line[3]:
-        sorted_nrs = sorted([line[0], line[2]])
-        y = line[1]
-    else:
-        continue
-
-    for nr in range(sorted_nrs[0], sorted_nrs[1] + 1):
-        key = str(x if x > -1 else nr) + ',' + str(y if y > -1 else nr)
-        nr_dic[key] = nr_dic[key] + 1 if key in nr_dic else 1
-        if nr_dic[key] == 2:
-            part1 += 1
+    if line[0] == line[2] or line[1] == line[3]:
+        for x in range(min(line[0], line[2]), max(line[0], line[2]) + 1):
+            for y in range(min(line[1], line[3]), max(line[1], line[3]) + 1):
+                nr_dic[(x,y)] = nr_dic.get((x,y), 0) + 1
+                if nr_dic[(x,y)] == 2:
+                    part1 += 1
 
 # Part 2
 part2 = part1
@@ -41,9 +31,10 @@ for line in data:
         x_nrs.reverse()
 
     for idx, val in enumerate(x_nrs):
-        key = str(x_nrs[idx]) + ',' + str(y_nrs[idx])
-        nr_dic[key] = nr_dic[key] + 1 if key in nr_dic else 1
-        if nr_dic[key] == 2:
+        x = x_nrs[idx]
+        y = y_nrs[idx]
+        nr_dic[(x,y)] = nr_dic.get((x,y), 0) + 1
+        if nr_dic[(x,y)] == 2:
             part2 += 1
 
 # =====================
