@@ -15,12 +15,8 @@ boards.append(board)
 
 def check_bingo(board):
     for idx, row in enumerate(board):
-        # check row
-        if all(x == 'x' for x in row):
-            return True
-
-        # check column
-        if all(x == 'x' for x in [row[idx] for row in board]):
+        # check row and column
+        if all(x == 'x' for x in row) or all(x == 'x' for x in [row[idx] for row in board]):
             return True
 
     return False
@@ -31,30 +27,33 @@ def mark_board_nr(boards, board, board_idx):
         boards[board_idx][row_idx] = ['x' if x == nr else x for x in row]
         if check_bingo(board):
             return True
-    
+
     return False
 
+
 # Part 1
-part1 = 0;
+part1 = 0
 for nr in input_nrs:
     for board_idx, board in enumerate(boards):
         if mark_board_nr(boards, board, board_idx):
-            part1 = sum([item for sublist in board for item in sublist if item != 'x']) * nr
+            part1 = sum(
+                [item for sublist in board for item in sublist if item != 'x']) * nr
             break
     if part1 > 0:
-        break;
+        break
 
 # Part 2
-completed_boards = [];  
+completed_boards = []
 part2 = 0
 for nr in input_nrs:
     for board_idx, board in enumerate(boards):
         board_done = mark_board_nr(boards, board, board_idx)
         if board_done and not board_idx in completed_boards:
             completed_boards.append(board_idx)
-        
+
         if len(boards) == len(completed_boards):
-            part2 = sum([item for sublist in board for item in sublist if item != 'x']) * nr
+            part2 = sum(
+                [item for sublist in board for item in sublist if item != 'x']) * nr
             break
 
     if part2 > 0:
