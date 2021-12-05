@@ -16,10 +16,8 @@ for line in data:
 # Part 2
 part2 = part1
 for line in data:
-    sorted_x = sorted([line[0], line[2]])
-    sorted_y = sorted([line[1], line[3]])
-    x_nrs = list(range(sorted_x[0], sorted_x[1] + 1))
-    y_nrs = list(range(sorted_y[0], sorted_y[1] + 1))
+    x_nrs = list(range(min(line[0], line[2]), max(line[0], line[2]) + 1))
+    y_nrs = list(range(min(line[1], line[3]), max(line[1], line[3]) + 1))
 
     if len(x_nrs) != len(y_nrs):
         continue
