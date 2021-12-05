@@ -28,8 +28,7 @@ for line in data:
     if line[0] > line[2]:
         x_nrs.reverse()
 
-    for idx, val in enumerate(x_nrs):
-        x = x_nrs[idx]
+    for idx, x in enumerate(x_nrs):
         y = y_nrs[idx]
         nr_dic[(x,y)] = nr_dic.get((x,y), 0) + 1
         if nr_dic[(x,y)] == 2:
