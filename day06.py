@@ -12,8 +12,8 @@ def get_nr_of_fishes(days):
     
     return sum(lanterns)
 
-part1 = get_nr_if_fishes(80)
-part2 = get_nr_if_fishes(256)
+part1 = get_nr_of_fishes(80)
+part2 = get_nr_of_fishes(256)
 
 print("Part 1:", part1)
 print("Part 2:", part2)
