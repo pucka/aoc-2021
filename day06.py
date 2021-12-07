@@ -2,7 +2,7 @@ with open("inputs/day6.txt") as file:
     data = [int(item) for sublist in [line.strip().split(',') for line in file] for item in sublist] # [1,3,2,4,1,3,....]
 
 def get_nr_of_fishes(days):
-    lanterns = [0 for _ in range(9)]
+    lanterns = [0] * 9
     for nr in data:
         lanterns[nr] += 1
     
